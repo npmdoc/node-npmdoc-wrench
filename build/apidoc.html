@@ -1,0 +1,1784 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/ryanmcgrath/wrench-js#readme"
+
+    >wrench (v1.5.9)</a>
+</h1>
+<h4>Recursive filesystem (and other) operations that Node *should* have.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.wrench">module wrench</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.LineReader">
+            function <span class="apidocSignatureSpan">wrench.</span>LineReader
+            <span class="apidocSignatureSpan">(filename, bufferSize)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.chmodSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>chmodSyncRecursive
+            <span class="apidocSignatureSpan">(sourceDir, filemode)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.chownSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>chownSyncRecursive
+            <span class="apidocSignatureSpan">(sourceDir, uid, gid)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.copyDirRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>copyDirRecursive
+            <span class="apidocSignatureSpan">(srcDir, newDir, opts, clbk)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.copyDirSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>copyDirSyncRecursive
+            <span class="apidocSignatureSpan">(sourceDir, newDirLocation, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.mkdirSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>mkdirSyncRecursive
+            <span class="apidocSignatureSpan">(path, mode)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.readdirRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>readdirRecursive
+            <span class="apidocSignatureSpan">(baseDir, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.readdirSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>readdirSyncRecursive
+            <span class="apidocSignatureSpan">(baseDir)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.rmdirRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>rmdirRecursive
+            <span class="apidocSignatureSpan">(dir, failSilent, clbk)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.rmdirSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.</span>rmdirSyncRecursive
+            <span class="apidocSignatureSpan">(path, failSilent)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan"></span>wrench</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">wrench.</span>LineReader.prototype</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.wrench.LineReader">module wrench.LineReader</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.LineReader.LineReader">
+            function <span class="apidocSignatureSpan">wrench.</span>LineReader
+            <span class="apidocSignatureSpan">(filename, bufferSize)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.wrench.LineReader.prototype">module wrench.LineReader.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.LineReader.prototype.close">
+            function <span class="apidocSignatureSpan">wrench.LineReader.prototype.</span>close
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.LineReader.prototype.getBufferAndSetCurrentPosition">
+            function <span class="apidocSignatureSpan">wrench.LineReader.prototype.</span>getBufferAndSetCurrentPosition
+            <span class="apidocSignatureSpan">(position)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.LineReader.prototype.getNextLine">
+            function <span class="apidocSignatureSpan">wrench.LineReader.prototype.</span>getNextLine
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.LineReader.prototype.hasNextLine">
+            function <span class="apidocSignatureSpan">wrench.LineReader.prototype.</span>hasNextLine
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.wrench.wrench">module wrench.wrench</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.LineReader">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>LineReader
+            <span class="apidocSignatureSpan">(filename, bufferSize)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.chmodSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>chmodSyncRecursive
+            <span class="apidocSignatureSpan">(sourceDir, filemode)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.chownSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>chownSyncRecursive
+            <span class="apidocSignatureSpan">(sourceDir, uid, gid)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.copyDirRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>copyDirRecursive
+            <span class="apidocSignatureSpan">(srcDir, newDir, opts, clbk)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.copyDirSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>copyDirSyncRecursive
+            <span class="apidocSignatureSpan">(sourceDir, newDirLocation, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.mkdirSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>mkdirSyncRecursive
+            <span class="apidocSignatureSpan">(path, mode)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.readdirRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>readdirRecursive
+            <span class="apidocSignatureSpan">(baseDir, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.readdirSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>readdirSyncRecursive
+            <span class="apidocSignatureSpan">(baseDir)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.rmdirRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>rmdirRecursive
+            <span class="apidocSignatureSpan">(dir, failSilent, clbk)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wrench.wrench.rmdirSyncRecursive">
+            function <span class="apidocSignatureSpan">wrench.wrench.</span>rmdirSyncRecursive
+            <span class="apidocSignatureSpan">(path, failSilent)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.wrench" id="apidoc.module.wrench">module wrench</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.LineReader" id="apidoc.element.wrench.LineReader">
+        function <span class="apidocSignatureSpan">wrench.</span>LineReader
+        <span class="apidocSignatureSpan">(filename, bufferSize)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">LineReader = function (filename, bufferSize) {
+    this.bufferSize = bufferSize || 8192;
+    this.buffer = &#x22;&#x22;;
+    this.fd = fs.openSync(filename, &#x22;r&#x22;);
+    this.currentPosition = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+});
+
+// Note: If a RegExp is provided then then it will be matched against the filename. If a function is
+//       provided then the signature should be the following:
+//       function(filename, dir) { return result; }
+
+// Read lines in from a file until you hit the end
+var f = new wrench.<span class="apidocCodeKeywordSpan">LineReader</span>(&#x27;x.txt&#x27;);
+while(f.hasNextLine()) {
+	util.puts(f.getNextLine());
+}
+
+// Note: You will need to close that above line reader at some point, otherwise
+// you will run into a &#x22;too many open files&#x22; error. f.close() or fs.closeSync(f.fd) are
+// your friends, as only you know when it is safe to close.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.chmodSyncRecursive" id="apidoc.element.wrench.chmodSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>chmodSyncRecursive
+        <span class="apidocSignatureSpan">(sourceDir, filemode)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">chmodSyncRecursive = function (sourceDir, filemode) {
+    var files = fs.readdirSync(sourceDir);
+
+    for(var i = 0; i &#x3c; files.length; i++) {
+        var currFile = fs.lstatSync(_path.join(sourceDir, files[i]));
+
+        if(currFile.isDirectory()) {
+<span class="apidocCodeCommentSpan">            /*  ...and recursion this thing right on back. */
+</span>            exports.chmodSyncRecursive(_path.join(sourceDir, files[i]), filemode);
+        } else {
+            /*  At this point, we&#x27;ve hit a file actually worth copying... so copy it on over. */
+            fs.chmod(_path.join(sourceDir, files[i]), filemode);
+        }
+    }
+
+    /*  Finally, chmod the parent directory */
+    fs.chmod(sourceDir, filemode);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Recursively delete the entire sub-tree of a directory, then kill the directory
+wrench.rmdirSyncRecursive(&#x27;my_directory_name&#x27;, failSilently);
+
+// Recursively read directories contents.
+wrench.readdirSyncRecursive(&#x27;my_directory_name&#x27;);
+
+// Recursively chmod the entire sub-tree of a directory
+wrench.<span class="apidocCodeKeywordSpan">chmodSyncRecursive</span>(&#x27;my_directory_name&#x27;, 0755);
+
+// Recursively chown the entire sub-tree of a directory
+wrench.chownSyncRecursive(&#x22;directory&#x22;, uid, gid);
+
+// Deep-copy an existing directory
+wrench.copyDirSyncRecursive(&#x27;directory_to_copy&#x27;, &#x27;location_where_copy_should_end_up&#x27;, {
+forceDelete: bool, // Whether to overwrite existing directory or not
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.chownSyncRecursive" id="apidoc.element.wrench.chownSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>chownSyncRecursive
+        <span class="apidocSignatureSpan">(sourceDir, uid, gid)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">chownSyncRecursive = function (sourceDir, uid, gid) {
+    var files = fs.readdirSync(sourceDir);
+
+    for(var i = 0; i &#x3c; files.length; i++) {
+        var currFile = fs.lstatSync(_path.join(sourceDir, files[i]));
+
+        if(currFile.isDirectory()) {
+<span class="apidocCodeCommentSpan">            /*  ...and recursion this thing right on back. */
+</span>            exports.chownSyncRecursive(_path.join(sourceDir, files[i]), uid, gid);
+        } else {
+            /*  At this point, we&#x27;ve hit a file actually worth chowning... so own it. */
+            fs.chownSync(_path.join(sourceDir, files[i]), uid, gid);
+        }
+    }
+
+    /*  Finally, chown the parent directory */
+    fs.chownSync(sourceDir, uid, gid);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Recursively read directories contents.
+wrench.readdirSyncRecursive(&#x27;my_directory_name&#x27;);
+
+// Recursively chmod the entire sub-tree of a directory
+wrench.chmodSyncRecursive(&#x27;my_directory_name&#x27;, 0755);
+
+// Recursively chown the entire sub-tree of a directory
+wrench.<span class="apidocCodeKeywordSpan">chownSyncRecursive</span>(&#x22;directory&#x22;, uid, gid);
+
+// Deep-copy an existing directory
+wrench.copyDirSyncRecursive(&#x27;directory_to_copy&#x27;, &#x27;location_where_copy_should_end_up&#x27;, {
+forceDelete: bool, // Whether to overwrite existing directory or not
+excludeHiddenUnix: bool, // Whether to copy hidden Unix files or not (preceding .)
+preserveFiles: bool, // If we&#x27;re overwriting something and the file already exists, keep the existing
+preserveTimestamps: bool, // Preserve the mtime and atime when copying files
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.copyDirRecursive" id="apidoc.element.wrench.copyDirRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>copyDirRecursive
+        <span class="apidocSignatureSpan">(srcDir, newDir, opts, clbk)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function copyDirRecursive(srcDir, newDir, opts, clbk) {
+    var originalArguments = Array.prototype.slice.apply(arguments);
+    srcDir = _path.normalize(srcDir);
+    newDir = _path.normalize(newDir);
+
+    fs.stat(newDir, function(err, newDirStat) {
+        if(!err) {
+            if(typeof opts !== &#x27;undefined&#x27; &#x26;&#x26; typeof opts !== &#x27;function&#x27; &#x26;&#x26; opts.forceDelete)
+                return exports.rmdirRecursive(newDir, function(err) {
+                    copyDirRecursive.apply(this, originalArguments);
+                });
+            else
+                return clbk(new Error(&#x27;You are trying to delete a directory that already exists. Specify forceDelete in an options
+ object to override this.&#x27;));
+        }
+
+	if(typeof opts === &#x27;function&#x27;)
+		clbk = opts;
+
+        fs.stat(srcDir, function(err, srcDirStat){
+            if (err) return clbk(err);
+            fs.mkdir(newDir, srcDirStat.mode, function(err){
+                if (err) return clbk(err);
+                fs.readdir(srcDir, function(err, files){
+                    if (err) return clbk(err);
+                    (function copyFiles(err){
+                        if (err) return clbk(err);
+
+                        var filename = files.shift();
+                        if (filename === null || typeof filename == &#x27;undefined&#x27;)
+                            return clbk(null);
+
+                        var file = srcDir+&#x27;/&#x27;+filename,
+                            newFile = newDir+&#x27;/&#x27;+filename;
+
+                        fs.stat(file, function(err, fileStat){
+                            if (err) return clbk(err);
+                            if (fileStat.isDirectory())
+                                copyDirRecursive(file, newFile, copyFiles, clbk);
+                            else if (fileStat.isSymbolicLink())
+                                fs.readlink(file, function(err, link){
+                                    if (err) return clbk(err);
+                                    fs.symlink(link, newFile, copyFiles);
+                                });
+                            else
+                                fs.readFile(file, function(err, data){
+                                    if (err) return clbk(err);
+                                    fs.writeFile(newFile, data, copyFiles);
+                                });
+                        });
+                    })();
+                });
+            });
+        });
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Recursively read directories contents
+var files = [];
+wrench.readdirRecursive(&#x27;my_directory_name&#x27;, function(error, curFiles) {
+    // curFiles is what you want
+});
+
+// If you&#x27;re feeling somewhat masochistic
+wrench.<span class="apidocCodeKeywordSpan">copyDirRecursive</span>(srcDir, newDir, {forceDelete: bool /* See sync version */}, callbackfn
+);
+```
+
+Questions, comments? Hit me up. (ryan [at] venodesigns.net | http://twitter.com/ryanmcgrath)
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.copyDirSyncRecursive" id="apidoc.element.wrench.copyDirSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>copyDirSyncRecursive
+        <span class="apidocSignatureSpan">(sourceDir, newDirLocation, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">copyDirSyncRecursive = function (sourceDir, newDirLocation, opts) {
+    opts = opts || {};
+
+    try {
+        if(fs.statSync(newDirLocation).isDirectory()) {
+            if(opts.forceDelete) {
+            exports.rmdirSyncRecursive(newDirLocation);
+            } else {
+                return new Error(&#x27;You are trying to delete a directory that already exists. Specify forceDelete in the opts argument
+ to override this. Bailing~&#x27;);
+            }
+        }
+    } catch(e) { }
+
+<span class="apidocCodeCommentSpan">    /*  Create the directory where all our junk is moving to; read the mode of the source directory and mirror it */
+</span>    var checkDir = fs.statSync(sourceDir);
+    try {
+        fs.mkdirSync(newDirLocation, checkDir.mode);
+    } catch (e) {
+        //if the directory already exists, that&#x27;s okay
+        if (e.code !== &#x27;EEXIST&#x27;) throw e;
+    }
+
+    var files = fs.readdirSync(sourceDir);
+    var hasFilter = opts.filter || opts.include || opts.exclude;
+    var preserveFiles = opts.preserveFiles === true;
+    var preserveTimestamps = opts.preserveTimestamps === true;
+
+    for(var i = 0; i &#x3c; files.length; i++) {
+        // ignores all files or directories which match the RegExp in opts.filter
+        if(typeof opts !== &#x27;undefined&#x27;) {
+            if (hasFilter) {
+                if (!isFileIncluded(opts, sourceDir, files[i])) {
+                    continue;
+                }
+            }
+
+            if (opts.excludeHiddenUnix &#x26;&#x26; /^\./.test(files[i])) continue;
+        }
+
+        var currFile = fs.lstatSync(_path.join(sourceDir, files[i]));
+
+        var fCopyFile = function(srcFile, destFile) {
+            if(typeof opts !== &#x27;undefined&#x27; &#x26;&#x26; opts.preserveFiles &#x26;&#x26; fs.existsSync(destFile)) return;
+
+            var contents = fs.readFileSync(srcFile);
+            fs.writeFileSync(destFile, contents);
+            var stat =  fs.lstatSync(srcFile);
+            fs.chmodSync(destFile, stat.mode);
+            if (preserveTimestamps) {
+                fs.utimesSync(destFile, stat.atime, stat.mtime)
+            }
+        };
+
+        if(currFile.isDirectory()) {
+            /*  recursion this thing right on back. */
+            exports.copyDirSyncRecursive(_path.join(sourceDir, files[i]), _path.join(newDirLocation, files[i]), opts);
+        } else if(currFile.isSymbolicLink()) {
+            var symlinkFull = fs.readlinkSync(_path.join(sourceDir, files[i]));
+            symlinkFull = _path.resolve(fs.realpathSync(sourceDir), symlinkFull);
+
+            if (typeof opts !== &#x27;undefined&#x27; &#x26;&#x26; !opts.inflateSymlinks) {
+                fs.symlinkSync(symlinkFull, _path.join(newDirLocation, files[i]));
+                continue;
+            }
+
+            var tmpCurrFile = fs.lstatSync(symlinkFull);
+            if (tmpCurrFile.isDirectory()) {
+                exports.copyDirSyncRecursive(symlinkFull, _path.join(newDirLocation, files[i]), opts);
+            } else {
+                /*  At this point, we&#x27;ve hit a file actually worth copying... so copy it on over. */
+                fCopyFile(symlinkFull, _path.join(newDirLocation, files[i]));
+            }
+        } else {
+            /*  At this point, we&#x27;ve hit a file actually worth copying... so copy it on over. */
+            fCopyFile(_path.join(sourceDir, files[i]), _path.join(newDirLocation, files[i]));
+        }
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+changed to be the behavior people expect there to be - if you try to copy over
+a directory that already exists, you&#x27;ll get an Error returned or thrown stating
+that you need to force it.
+
+Something like this will do the trick:
+
+``` javascript
+wrench.<span class="apidocCodeKeywordSpan">copyDirSyncRecursive</span>(&#x27;directory_to_copy&#x27;, &#x27;location_where_copy_should_end_up
+&#x27;, {
+    forceDelete: true
+});
+```
+
+If you desire the older behavior of Wrench... hit up your package.json. If you
+happen to find bugs in the 1.5.0 release please feel free to file them on the
+GitHub issues tracker for this project, or send me a pull request and I&#x27;ll get to
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.mkdirSyncRecursive" id="apidoc.element.wrench.mkdirSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>mkdirSyncRecursive
+        <span class="apidocSignatureSpan">(path, mode)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">mkdirSyncRecursive = function (path, mode) {
+    var self = this;
+    path = _path.normalize(path)
+
+    try {
+        fs.mkdirSync(path, mode);
+    } catch(err) {
+        if(err.code == &#x22;ENOENT&#x22;) {
+            var slashIdx = path.lastIndexOf(_path.sep);
+
+            if(slashIdx &#x3e; 0) {
+                var parentPath = path.substring(0, slashIdx);
+                mkdirSyncRecursive(parentPath, mode);
+                mkdirSyncRecursive(path, mode);
+            } else {
+                throw err;
+            }
+        } else if(err.code == &#x22;EEXIST&#x22;) {
+            return;
+        } else {
+            throw err;
+        }
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var wrench = require(&#x27;wrench&#x27;),
+	util = require(&#x27;util&#x27;);
+```
+
+### Synchronous operations
+``` javascript
+// Recursively create directories, sub-trees and all.
+wrench.<span class="apidocCodeKeywordSpan">mkdirSyncRecursive</span>(dir, 0777);
+
+// Recursively delete the entire sub-tree of a directory, then kill the directory
+wrench.rmdirSyncRecursive(&#x27;my_directory_name&#x27;, failSilently);
+
+// Recursively read directories contents.
+wrench.readdirSyncRecursive(&#x27;my_directory_name&#x27;);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.readdirRecursive" id="apidoc.element.wrench.readdirRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>readdirRecursive
+        <span class="apidocSignatureSpan">(baseDir, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">readdirRecursive = function (baseDir, fn) {
+    baseDir = baseDir.replace(/\/$/, &#x27;&#x27;);
+
+    var waitCount = 0;
+
+    function readdirRecursive(curDir) {
+        var prependcurDir = function(fname){
+            return _path.join(curDir, fname);
+        };
+
+        waitCount++;
+        fs.readdir(curDir, function(e, curFiles) {
+            if (e) {
+                fn(e);
+                return;
+            }
+            waitCount--;
+
+            curFiles = curFiles.map(prependcurDir);
+
+            curFiles.forEach(function(it) {
+                waitCount++;
+
+                fs.stat(it, function(e, stat) {
+                    waitCount--;
+
+                    if (e) {
+                        fn(e);
+                    } else {
+                        if (stat.isDirectory()) {
+                            readdirRecursive(it);
+                        }
+                    }
+
+                    if (waitCount == 0) {
+                        fn(null, null);
+                    }
+                });
+            });
+
+            fn(null, curFiles.map(function(val) {
+                // convert absolute paths to relative
+                return _path.relative(baseDir, val);
+            }));
+
+            if (waitCount == 0) {
+                fn(null, null);
+            }
+        });
+    };
+
+    readdirRecursive(baseDir);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// your friends, as only you know when it is safe to close.
+```
+
+### Asynchronous operations
+``` javascript
+// Recursively read directories contents
+var files = [];
+wrench.<span class="apidocCodeKeywordSpan">readdirRecursive</span>(&#x27;my_directory_name&#x27;, function(error, curFiles) {
+    // curFiles is what you want
+});
+
+// If you&#x27;re feeling somewhat masochistic
+wrench.copyDirRecursive(srcDir, newDir, {forceDelete: bool /* See sync version */}, callbackfn);
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.readdirSyncRecursive" id="apidoc.element.wrench.readdirSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>readdirSyncRecursive
+        <span class="apidocSignatureSpan">(baseDir)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">readdirSyncRecursive = function (baseDir) {
+    baseDir = baseDir.replace(/\/$/, &#x27;&#x27;);
+
+    var readdirSyncRecursive = function(baseDir) {
+        var files = [],
+            curFiles,
+            nextDirs,
+            isDir = function(fname){
+                return fs.existsSync(_path.join(baseDir, fname)) ? fs.statSync( _path.join(baseDir, fname) ).isDirectory() : false
+;
+            },
+            prependBaseDir = function(fname){
+                return _path.join(baseDir, fname);
+            };
+
+        curFiles = fs.readdirSync(baseDir);
+        nextDirs = curFiles.filter(isDir);
+        curFiles = curFiles.map(prependBaseDir);
+
+        files = files.concat( curFiles );
+
+        while (nextDirs.length) {
+            files = files.concat( readdirSyncRecursive( _path.join(baseDir, nextDirs.shift()) ) );
+        }
+
+        return files;
+    };
+
+    // convert absolute paths to relative
+    var fileList = readdirSyncRecursive(baseDir).map(function(val){
+        return _path.relative(baseDir, val);
+    });
+
+    return fileList;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Recursively create directories, sub-trees and all.
+wrench.mkdirSyncRecursive(dir, 0777);
+
+// Recursively delete the entire sub-tree of a directory, then kill the directory
+wrench.rmdirSyncRecursive(&#x27;my_directory_name&#x27;, failSilently);
+
+// Recursively read directories contents.
+wrench.<span class="apidocCodeKeywordSpan">readdirSyncRecursive</span>(&#x27;my_directory_name&#x27;);
+
+// Recursively chmod the entire sub-tree of a directory
+wrench.chmodSyncRecursive(&#x27;my_directory_name&#x27;, 0755);
+
+// Recursively chown the entire sub-tree of a directory
+wrench.chownSyncRecursive(&#x22;directory&#x22;, uid, gid);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.rmdirRecursive" id="apidoc.element.wrench.rmdirRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>rmdirRecursive
+        <span class="apidocSignatureSpan">(dir, failSilent, clbk)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function rmdirRecursive(dir, failSilent, clbk){
+    if(clbk === null || typeof clbk == &#x27;undefined&#x27;)
+        clbk = function(err) {};
+
+    fs.readdir(dir, function(err, files) {
+        if(err &#x26;&#x26; typeof failSilent === &#x27;boolean&#x27; &#x26;&#x26; !failSilent)
+        return clbk(err);
+
+        if(typeof failSilent === &#x27;function&#x27;)
+            clbk = failSilent;
+
+        (function rmFile(err){
+            if (err) return clbk(err);
+
+            var filename = files.shift();
+            if (filename === null || typeof filename == &#x27;undefined&#x27;)
+                return fs.rmdir(dir, clbk);
+
+            var file = dir+&#x27;/&#x27;+filename;
+            fs.lstat(file, function(err, stat){
+                if (err) return clbk(err);
+                if (stat.isDirectory())
+                    rmdirRecursive(file, rmFile);
+                else
+                    fs.unlink(file, rmFile);
+            });
+        })();
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+/*  Finally, chown the parent directory */
+fs.chownSync(sourceDir, uid, gid);
+};
+
+
+
+/*  wrench.<span class="apidocCodeKeywordSpan">rmdirRecursive</span>(&#x22;directory_path&#x22;, callback);
+ *
+ *  Recursively dives through directories and obliterates everything about it.
+ */
+exports.rmdirRecursive = function rmdirRecursive(dir, failSilent, clbk){
+if(clbk === null || typeof clbk == &#x27;undefined&#x27;)
+    clbk = function(err) {};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.rmdirSyncRecursive" id="apidoc.element.wrench.rmdirSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.</span>rmdirSyncRecursive
+        <span class="apidocSignatureSpan">(path, failSilent)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">rmdirSyncRecursive = function (path, failSilent) {
+    var files;
+
+    try {
+        files = fs.readdirSync(path);
+    } catch (err) {
+
+        if(failSilent) return;
+        throw new Error(err.message);
+    }
+
+<span class="apidocCodeCommentSpan">    /*  Loop through and delete everything in the sub-tree after checking it */
+</span>    for(var i = 0; i &#x3c; files.length; i++) {
+        var file = _path.join(path, files[i]);
+        var currFile = fs.lstatSync(file);
+
+        if(currFile.isDirectory())  {
+            // Recursive function back to the beginning
+            exports.rmdirSyncRecursive(file);
+        } else if(currFile.isSymbolicLink()) {
+            // Unlink symlinks
+            if (isWindows) {
+                fs.chmodSync(file, 666) // Windows needs this unless joyent/node#3006 is resolved..
+            }
+
+            fs.unlinkSync(file);
+        } else {
+            // Assume it&#x27;s a file - perhaps a try/catch belongs here?
+            if (isWindows) {
+                fs.chmodSync(file, 666) // Windows needs this unless joyent/node#3006 is resolved..
+            }
+
+            fs.unlinkSync(file);
+        }
+    }
+
+    /*  Now that we know everything in the sub-tree has been deleted, we can delete the main
+     directory. Huzzah for the shopkeep. */
+    return fs.rmdirSync(path);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### Synchronous operations
+``` javascript
+// Recursively create directories, sub-trees and all.
+wrench.mkdirSyncRecursive(dir, 0777);
+
+// Recursively delete the entire sub-tree of a directory, then kill the directory
+wrench.<span class="apidocCodeKeywordSpan">rmdirSyncRecursive</span>(&#x27;my_directory_name&#x27;, failSilently);
+
+// Recursively read directories contents.
+wrench.readdirSyncRecursive(&#x27;my_directory_name&#x27;);
+
+// Recursively chmod the entire sub-tree of a directory
+wrench.chmodSyncRecursive(&#x27;my_directory_name&#x27;, 0755);
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.wrench.LineReader" id="apidoc.module.wrench.LineReader">module wrench.LineReader</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.LineReader.LineReader" id="apidoc.element.wrench.LineReader.LineReader">
+        function <span class="apidocSignatureSpan">wrench.</span>LineReader
+        <span class="apidocSignatureSpan">(filename, bufferSize)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">LineReader = function (filename, bufferSize) {
+    this.bufferSize = bufferSize || 8192;
+    this.buffer = &#x22;&#x22;;
+    this.fd = fs.openSync(filename, &#x22;r&#x22;);
+    this.currentPosition = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+});
+
+// Note: If a RegExp is provided then then it will be matched against the filename. If a function is
+//       provided then the signature should be the following:
+//       function(filename, dir) { return result; }
+
+// Read lines in from a file until you hit the end
+var f = new wrench.<span class="apidocCodeKeywordSpan">LineReader</span>(&#x27;x.txt&#x27;);
+while(f.hasNextLine()) {
+	util.puts(f.getNextLine());
+}
+
+// Note: You will need to close that above line reader at some point, otherwise
+// you will run into a &#x22;too many open files&#x22; error. f.close() or fs.closeSync(f.fd) are
+// your friends, as only you know when it is safe to close.
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.wrench.LineReader.prototype" id="apidoc.module.wrench.LineReader.prototype">module wrench.LineReader.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.LineReader.prototype.close" id="apidoc.element.wrench.LineReader.prototype.close">
+        function <span class="apidocSignatureSpan">wrench.LineReader.prototype.</span>close
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">close = function () {
+    return fs.closeSync(this.fd);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Read lines in from a file until you hit the end
+var f = new wrench.LineReader(&#x27;x.txt&#x27;);
+while(f.hasNextLine()) {
+	util.puts(f.getNextLine());
+}
+
+// Note: You will need to close that above line reader at some point, otherwise
+// you will run into a &#x22;too many open files&#x22; error. f.<span class="apidocCodeKeywordSpan">close</span>() or fs.closeSync
+(f.fd) are
+// your friends, as only you know when it is safe to close.
+```
+
+### Asynchronous operations
+``` javascript
+// Recursively read directories contents
+var files = [];
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.LineReader.prototype.getBufferAndSetCurrentPosition" id="apidoc.element.wrench.LineReader.prototype.getBufferAndSetCurrentPosition">
+        function <span class="apidocSignatureSpan">wrench.LineReader.prototype.</span>getBufferAndSetCurrentPosition
+        <span class="apidocSignatureSpan">(position)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getBufferAndSetCurrentPosition = function (position) {
+    var res = fs.readSync(this.fd, this.bufferSize, position, &#x22;ascii&#x22;);
+
+    this.buffer += res[0];
+    if(res[1] === 0) {
+        this.currentPosition = -1;
+    } else {
+        this.currentPosition = position + res[1];
+    }
+
+    return this.currentPosition;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    }
+
+    return this.currentPosition;
+},
+
+hasNextLine: function() {
+    while(this.buffer.indexOf(&#x27;\n&#x27;) === -1) {
+        this.<span class="apidocCodeKeywordSpan">getBufferAndSetCurrentPosition</span>(this.currentPosition);
+        if(this.currentPosition === -1) return false;
+    }
+
+    if(this.buffer.indexOf(&#x22;\n&#x22;) &#x3e; -1 || this.buffer.length !== 0) return true;
+    return false;
+},
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.LineReader.prototype.getNextLine" id="apidoc.element.wrench.LineReader.prototype.getNextLine">
+        function <span class="apidocSignatureSpan">wrench.LineReader.prototype.</span>getNextLine
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getNextLine = function () {
+    var lineEnd = this.buffer.indexOf(&#x22;\n&#x22;),
+        result = this.buffer.substring(0, lineEnd != -1 ? lineEnd : this.buffer.length);
+
+    this.buffer = this.buffer.substring(result.length + 1, this.buffer.length);
+    return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Note: If a RegExp is provided then then it will be matched against the filename. If a function is
+//       provided then the signature should be the following:
+//       function(filename, dir) { return result; }
+
+// Read lines in from a file until you hit the end
+var f = new wrench.LineReader(&#x27;x.txt&#x27;);
+while(f.hasNextLine()) {
+	util.puts(f.<span class="apidocCodeKeywordSpan">getNextLine</span>());
+}
+
+// Note: You will need to close that above line reader at some point, otherwise
+// you will run into a &#x22;too many open files&#x22; error. f.close() or fs.closeSync(f.fd) are
+// your friends, as only you know when it is safe to close.
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.LineReader.prototype.hasNextLine" id="apidoc.element.wrench.LineReader.prototype.hasNextLine">
+        function <span class="apidocSignatureSpan">wrench.LineReader.prototype.</span>hasNextLine
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">hasNextLine = function () {
+    while(this.buffer.indexOf(&#x27;\n&#x27;) === -1) {
+        this.getBufferAndSetCurrentPosition(this.currentPosition);
+        if(this.currentPosition === -1) return false;
+    }
+
+    if(this.buffer.indexOf(&#x22;\n&#x22;) &#x3e; -1 || this.buffer.length !== 0) return true;
+    return false;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+// Note: If a RegExp is provided then then it will be matched against the filename. If a function is
+//       provided then the signature should be the following:
+//       function(filename, dir) { return result; }
+
+// Read lines in from a file until you hit the end
+var f = new wrench.LineReader(&#x27;x.txt&#x27;);
+while(f.<span class="apidocCodeKeywordSpan">hasNextLine</span>()) {
+	util.puts(f.getNextLine());
+}
+
+// Note: You will need to close that above line reader at some point, otherwise
+// you will run into a &#x22;too many open files&#x22; error. f.close() or fs.closeSync(f.fd) are
+// your friends, as only you know when it is safe to close.
+```
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.wrench.wrench" id="apidoc.module.wrench.wrench">module wrench.wrench</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.LineReader" id="apidoc.element.wrench.wrench.LineReader">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>LineReader
+        <span class="apidocSignatureSpan">(filename, bufferSize)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">LineReader = function (filename, bufferSize) {
+    this.bufferSize = bufferSize || 8192;
+    this.buffer = &#x22;&#x22;;
+    this.fd = fs.openSync(filename, &#x22;r&#x22;);
+    this.currentPosition = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+});
+
+// Note: If a RegExp is provided then then it will be matched against the filename. If a function is
+//       provided then the signature should be the following:
+//       function(filename, dir) { return result; }
+
+// Read lines in from a file until you hit the end
+var f = new wrench.<span class="apidocCodeKeywordSpan">LineReader</span>(&#x27;x.txt&#x27;);
+while(f.hasNextLine()) {
+	util.puts(f.getNextLine());
+}
+
+// Note: You will need to close that above line reader at some point, otherwise
+// you will run into a &#x22;too many open files&#x22; error. f.close() or fs.closeSync(f.fd) are
+// your friends, as only you know when it is safe to close.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.chmodSyncRecursive" id="apidoc.element.wrench.wrench.chmodSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>chmodSyncRecursive
+        <span class="apidocSignatureSpan">(sourceDir, filemode)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">chmodSyncRecursive = function (sourceDir, filemode) {
+    var files = fs.readdirSync(sourceDir);
+
+    for(var i = 0; i &#x3c; files.length; i++) {
+        var currFile = fs.lstatSync(_path.join(sourceDir, files[i]));
+
+        if(currFile.isDirectory()) {
+<span class="apidocCodeCommentSpan">            /*  ...and recursion this thing right on back. */
+</span>            exports.chmodSyncRecursive(_path.join(sourceDir, files[i]), filemode);
+        } else {
+            /*  At this point, we&#x27;ve hit a file actually worth copying... so copy it on over. */
+            fs.chmod(_path.join(sourceDir, files[i]), filemode);
+        }
+    }
+
+    /*  Finally, chmod the parent directory */
+    fs.chmod(sourceDir, filemode);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Recursively delete the entire sub-tree of a directory, then kill the directory
+wrench.rmdirSyncRecursive(&#x27;my_directory_name&#x27;, failSilently);
+
+// Recursively read directories contents.
+wrench.readdirSyncRecursive(&#x27;my_directory_name&#x27;);
+
+// Recursively chmod the entire sub-tree of a directory
+wrench.<span class="apidocCodeKeywordSpan">chmodSyncRecursive</span>(&#x27;my_directory_name&#x27;, 0755);
+
+// Recursively chown the entire sub-tree of a directory
+wrench.chownSyncRecursive(&#x22;directory&#x22;, uid, gid);
+
+// Deep-copy an existing directory
+wrench.copyDirSyncRecursive(&#x27;directory_to_copy&#x27;, &#x27;location_where_copy_should_end_up&#x27;, {
+forceDelete: bool, // Whether to overwrite existing directory or not
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.chownSyncRecursive" id="apidoc.element.wrench.wrench.chownSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>chownSyncRecursive
+        <span class="apidocSignatureSpan">(sourceDir, uid, gid)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">chownSyncRecursive = function (sourceDir, uid, gid) {
+    var files = fs.readdirSync(sourceDir);
+
+    for(var i = 0; i &#x3c; files.length; i++) {
+        var currFile = fs.lstatSync(_path.join(sourceDir, files[i]));
+
+        if(currFile.isDirectory()) {
+<span class="apidocCodeCommentSpan">            /*  ...and recursion this thing right on back. */
+</span>            exports.chownSyncRecursive(_path.join(sourceDir, files[i]), uid, gid);
+        } else {
+            /*  At this point, we&#x27;ve hit a file actually worth chowning... so own it. */
+            fs.chownSync(_path.join(sourceDir, files[i]), uid, gid);
+        }
+    }
+
+    /*  Finally, chown the parent directory */
+    fs.chownSync(sourceDir, uid, gid);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Recursively read directories contents.
+wrench.readdirSyncRecursive(&#x27;my_directory_name&#x27;);
+
+// Recursively chmod the entire sub-tree of a directory
+wrench.chmodSyncRecursive(&#x27;my_directory_name&#x27;, 0755);
+
+// Recursively chown the entire sub-tree of a directory
+wrench.<span class="apidocCodeKeywordSpan">chownSyncRecursive</span>(&#x22;directory&#x22;, uid, gid);
+
+// Deep-copy an existing directory
+wrench.copyDirSyncRecursive(&#x27;directory_to_copy&#x27;, &#x27;location_where_copy_should_end_up&#x27;, {
+forceDelete: bool, // Whether to overwrite existing directory or not
+excludeHiddenUnix: bool, // Whether to copy hidden Unix files or not (preceding .)
+preserveFiles: bool, // If we&#x27;re overwriting something and the file already exists, keep the existing
+preserveTimestamps: bool, // Preserve the mtime and atime when copying files
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.copyDirRecursive" id="apidoc.element.wrench.wrench.copyDirRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>copyDirRecursive
+        <span class="apidocSignatureSpan">(srcDir, newDir, opts, clbk)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function copyDirRecursive(srcDir, newDir, opts, clbk) {
+    var originalArguments = Array.prototype.slice.apply(arguments);
+    srcDir = _path.normalize(srcDir);
+    newDir = _path.normalize(newDir);
+
+    fs.stat(newDir, function(err, newDirStat) {
+        if(!err) {
+            if(typeof opts !== &#x27;undefined&#x27; &#x26;&#x26; typeof opts !== &#x27;function&#x27; &#x26;&#x26; opts.forceDelete)
+                return exports.rmdirRecursive(newDir, function(err) {
+                    copyDirRecursive.apply(this, originalArguments);
+                });
+            else
+                return clbk(new Error(&#x27;You are trying to delete a directory that already exists. Specify forceDelete in an options
+ object to override this.&#x27;));
+        }
+
+	if(typeof opts === &#x27;function&#x27;)
+		clbk = opts;
+
+        fs.stat(srcDir, function(err, srcDirStat){
+            if (err) return clbk(err);
+            fs.mkdir(newDir, srcDirStat.mode, function(err){
+                if (err) return clbk(err);
+                fs.readdir(srcDir, function(err, files){
+                    if (err) return clbk(err);
+                    (function copyFiles(err){
+                        if (err) return clbk(err);
+
+                        var filename = files.shift();
+                        if (filename === null || typeof filename == &#x27;undefined&#x27;)
+                            return clbk(null);
+
+                        var file = srcDir+&#x27;/&#x27;+filename,
+                            newFile = newDir+&#x27;/&#x27;+filename;
+
+                        fs.stat(file, function(err, fileStat){
+                            if (err) return clbk(err);
+                            if (fileStat.isDirectory())
+                                copyDirRecursive(file, newFile, copyFiles, clbk);
+                            else if (fileStat.isSymbolicLink())
+                                fs.readlink(file, function(err, link){
+                                    if (err) return clbk(err);
+                                    fs.symlink(link, newFile, copyFiles);
+                                });
+                            else
+                                fs.readFile(file, function(err, data){
+                                    if (err) return clbk(err);
+                                    fs.writeFile(newFile, data, copyFiles);
+                                });
+                        });
+                    })();
+                });
+            });
+        });
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Recursively read directories contents
+var files = [];
+wrench.readdirRecursive(&#x27;my_directory_name&#x27;, function(error, curFiles) {
+    // curFiles is what you want
+});
+
+// If you&#x27;re feeling somewhat masochistic
+wrench.<span class="apidocCodeKeywordSpan">copyDirRecursive</span>(srcDir, newDir, {forceDelete: bool /* See sync version */}, callbackfn
+);
+```
+
+Questions, comments? Hit me up. (ryan [at] venodesigns.net | http://twitter.com/ryanmcgrath)
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.copyDirSyncRecursive" id="apidoc.element.wrench.wrench.copyDirSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>copyDirSyncRecursive
+        <span class="apidocSignatureSpan">(sourceDir, newDirLocation, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">copyDirSyncRecursive = function (sourceDir, newDirLocation, opts) {
+    opts = opts || {};
+
+    try {
+        if(fs.statSync(newDirLocation).isDirectory()) {
+            if(opts.forceDelete) {
+            exports.rmdirSyncRecursive(newDirLocation);
+            } else {
+                return new Error(&#x27;You are trying to delete a directory that already exists. Specify forceDelete in the opts argument
+ to override this. Bailing~&#x27;);
+            }
+        }
+    } catch(e) { }
+
+<span class="apidocCodeCommentSpan">    /*  Create the directory where all our junk is moving to; read the mode of the source directory and mirror it */
+</span>    var checkDir = fs.statSync(sourceDir);
+    try {
+        fs.mkdirSync(newDirLocation, checkDir.mode);
+    } catch (e) {
+        //if the directory already exists, that&#x27;s okay
+        if (e.code !== &#x27;EEXIST&#x27;) throw e;
+    }
+
+    var files = fs.readdirSync(sourceDir);
+    var hasFilter = opts.filter || opts.include || opts.exclude;
+    var preserveFiles = opts.preserveFiles === true;
+    var preserveTimestamps = opts.preserveTimestamps === true;
+
+    for(var i = 0; i &#x3c; files.length; i++) {
+        // ignores all files or directories which match the RegExp in opts.filter
+        if(typeof opts !== &#x27;undefined&#x27;) {
+            if (hasFilter) {
+                if (!isFileIncluded(opts, sourceDir, files[i])) {
+                    continue;
+                }
+            }
+
+            if (opts.excludeHiddenUnix &#x26;&#x26; /^\./.test(files[i])) continue;
+        }
+
+        var currFile = fs.lstatSync(_path.join(sourceDir, files[i]));
+
+        var fCopyFile = function(srcFile, destFile) {
+            if(typeof opts !== &#x27;undefined&#x27; &#x26;&#x26; opts.preserveFiles &#x26;&#x26; fs.existsSync(destFile)) return;
+
+            var contents = fs.readFileSync(srcFile);
+            fs.writeFileSync(destFile, contents);
+            var stat =  fs.lstatSync(srcFile);
+            fs.chmodSync(destFile, stat.mode);
+            if (preserveTimestamps) {
+                fs.utimesSync(destFile, stat.atime, stat.mtime)
+            }
+        };
+
+        if(currFile.isDirectory()) {
+            /*  recursion this thing right on back. */
+            exports.copyDirSyncRecursive(_path.join(sourceDir, files[i]), _path.join(newDirLocation, files[i]), opts);
+        } else if(currFile.isSymbolicLink()) {
+            var symlinkFull = fs.readlinkSync(_path.join(sourceDir, files[i]));
+            symlinkFull = _path.resolve(fs.realpathSync(sourceDir), symlinkFull);
+
+            if (typeof opts !== &#x27;undefined&#x27; &#x26;&#x26; !opts.inflateSymlinks) {
+                fs.symlinkSync(symlinkFull, _path.join(newDirLocation, files[i]));
+                continue;
+            }
+
+            var tmpCurrFile = fs.lstatSync(symlinkFull);
+            if (tmpCurrFile.isDirectory()) {
+                exports.copyDirSyncRecursive(symlinkFull, _path.join(newDirLocation, files[i]), opts);
+            } else {
+                /*  At this point, we&#x27;ve hit a file actually worth copying... so copy it on over. */
+                fCopyFile(symlinkFull, _path.join(newDirLocation, files[i]));
+            }
+        } else {
+            /*  At this point, we&#x27;ve hit a file actually worth copying... so copy it on over. */
+            fCopyFile(_path.join(sourceDir, files[i]), _path.join(newDirLocation, files[i]));
+        }
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+changed to be the behavior people expect there to be - if you try to copy over
+a directory that already exists, you&#x27;ll get an Error returned or thrown stating
+that you need to force it.
+
+Something like this will do the trick:
+
+``` javascript
+wrench.<span class="apidocCodeKeywordSpan">copyDirSyncRecursive</span>(&#x27;directory_to_copy&#x27;, &#x27;location_where_copy_should_end_up
+&#x27;, {
+    forceDelete: true
+});
+```
+
+If you desire the older behavior of Wrench... hit up your package.json. If you
+happen to find bugs in the 1.5.0 release please feel free to file them on the
+GitHub issues tracker for this project, or send me a pull request and I&#x27;ll get to
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.mkdirSyncRecursive" id="apidoc.element.wrench.wrench.mkdirSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>mkdirSyncRecursive
+        <span class="apidocSignatureSpan">(path, mode)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">mkdirSyncRecursive = function (path, mode) {
+    var self = this;
+    path = _path.normalize(path)
+
+    try {
+        fs.mkdirSync(path, mode);
+    } catch(err) {
+        if(err.code == &#x22;ENOENT&#x22;) {
+            var slashIdx = path.lastIndexOf(_path.sep);
+
+            if(slashIdx &#x3e; 0) {
+                var parentPath = path.substring(0, slashIdx);
+                mkdirSyncRecursive(parentPath, mode);
+                mkdirSyncRecursive(path, mode);
+            } else {
+                throw err;
+            }
+        } else if(err.code == &#x22;EEXIST&#x22;) {
+            return;
+        } else {
+            throw err;
+        }
+    }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var wrench = require(&#x27;wrench&#x27;),
+	util = require(&#x27;util&#x27;);
+```
+
+### Synchronous operations
+``` javascript
+// Recursively create directories, sub-trees and all.
+wrench.<span class="apidocCodeKeywordSpan">mkdirSyncRecursive</span>(dir, 0777);
+
+// Recursively delete the entire sub-tree of a directory, then kill the directory
+wrench.rmdirSyncRecursive(&#x27;my_directory_name&#x27;, failSilently);
+
+// Recursively read directories contents.
+wrench.readdirSyncRecursive(&#x27;my_directory_name&#x27;);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.readdirRecursive" id="apidoc.element.wrench.wrench.readdirRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>readdirRecursive
+        <span class="apidocSignatureSpan">(baseDir, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">readdirRecursive = function (baseDir, fn) {
+    baseDir = baseDir.replace(/\/$/, &#x27;&#x27;);
+
+    var waitCount = 0;
+
+    function readdirRecursive(curDir) {
+        var prependcurDir = function(fname){
+            return _path.join(curDir, fname);
+        };
+
+        waitCount++;
+        fs.readdir(curDir, function(e, curFiles) {
+            if (e) {
+                fn(e);
+                return;
+            }
+            waitCount--;
+
+            curFiles = curFiles.map(prependcurDir);
+
+            curFiles.forEach(function(it) {
+                waitCount++;
+
+                fs.stat(it, function(e, stat) {
+                    waitCount--;
+
+                    if (e) {
+                        fn(e);
+                    } else {
+                        if (stat.isDirectory()) {
+                            readdirRecursive(it);
+                        }
+                    }
+
+                    if (waitCount == 0) {
+                        fn(null, null);
+                    }
+                });
+            });
+
+            fn(null, curFiles.map(function(val) {
+                // convert absolute paths to relative
+                return _path.relative(baseDir, val);
+            }));
+
+            if (waitCount == 0) {
+                fn(null, null);
+            }
+        });
+    };
+
+    readdirRecursive(baseDir);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// your friends, as only you know when it is safe to close.
+```
+
+### Asynchronous operations
+``` javascript
+// Recursively read directories contents
+var files = [];
+wrench.<span class="apidocCodeKeywordSpan">readdirRecursive</span>(&#x27;my_directory_name&#x27;, function(error, curFiles) {
+    // curFiles is what you want
+});
+
+// If you&#x27;re feeling somewhat masochistic
+wrench.copyDirRecursive(srcDir, newDir, {forceDelete: bool /* See sync version */}, callbackfn);
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.readdirSyncRecursive" id="apidoc.element.wrench.wrench.readdirSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>readdirSyncRecursive
+        <span class="apidocSignatureSpan">(baseDir)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">readdirSyncRecursive = function (baseDir) {
+    baseDir = baseDir.replace(/\/$/, &#x27;&#x27;);
+
+    var readdirSyncRecursive = function(baseDir) {
+        var files = [],
+            curFiles,
+            nextDirs,
+            isDir = function(fname){
+                return fs.existsSync(_path.join(baseDir, fname)) ? fs.statSync( _path.join(baseDir, fname) ).isDirectory() : false
+;
+            },
+            prependBaseDir = function(fname){
+                return _path.join(baseDir, fname);
+            };
+
+        curFiles = fs.readdirSync(baseDir);
+        nextDirs = curFiles.filter(isDir);
+        curFiles = curFiles.map(prependBaseDir);
+
+        files = files.concat( curFiles );
+
+        while (nextDirs.length) {
+            files = files.concat( readdirSyncRecursive( _path.join(baseDir, nextDirs.shift()) ) );
+        }
+
+        return files;
+    };
+
+    // convert absolute paths to relative
+    var fileList = readdirSyncRecursive(baseDir).map(function(val){
+        return _path.relative(baseDir, val);
+    });
+
+    return fileList;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Recursively create directories, sub-trees and all.
+wrench.mkdirSyncRecursive(dir, 0777);
+
+// Recursively delete the entire sub-tree of a directory, then kill the directory
+wrench.rmdirSyncRecursive(&#x27;my_directory_name&#x27;, failSilently);
+
+// Recursively read directories contents.
+wrench.<span class="apidocCodeKeywordSpan">readdirSyncRecursive</span>(&#x27;my_directory_name&#x27;);
+
+// Recursively chmod the entire sub-tree of a directory
+wrench.chmodSyncRecursive(&#x27;my_directory_name&#x27;, 0755);
+
+// Recursively chown the entire sub-tree of a directory
+wrench.chownSyncRecursive(&#x22;directory&#x22;, uid, gid);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.rmdirRecursive" id="apidoc.element.wrench.wrench.rmdirRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>rmdirRecursive
+        <span class="apidocSignatureSpan">(dir, failSilent, clbk)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function rmdirRecursive(dir, failSilent, clbk){
+    if(clbk === null || typeof clbk == &#x27;undefined&#x27;)
+        clbk = function(err) {};
+
+    fs.readdir(dir, function(err, files) {
+        if(err &#x26;&#x26; typeof failSilent === &#x27;boolean&#x27; &#x26;&#x26; !failSilent)
+        return clbk(err);
+
+        if(typeof failSilent === &#x27;function&#x27;)
+            clbk = failSilent;
+
+        (function rmFile(err){
+            if (err) return clbk(err);
+
+            var filename = files.shift();
+            if (filename === null || typeof filename == &#x27;undefined&#x27;)
+                return fs.rmdir(dir, clbk);
+
+            var file = dir+&#x27;/&#x27;+filename;
+            fs.lstat(file, function(err, stat){
+                if (err) return clbk(err);
+                if (stat.isDirectory())
+                    rmdirRecursive(file, rmFile);
+                else
+                    fs.unlink(file, rmFile);
+            });
+        })();
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+/*  Finally, chown the parent directory */
+fs.chownSync(sourceDir, uid, gid);
+};
+
+
+
+/*  wrench.<span class="apidocCodeKeywordSpan">rmdirRecursive</span>(&#x22;directory_path&#x22;, callback);
+ *
+ *  Recursively dives through directories and obliterates everything about it.
+ */
+exports.rmdirRecursive = function rmdirRecursive(dir, failSilent, clbk){
+if(clbk === null || typeof clbk == &#x27;undefined&#x27;)
+    clbk = function(err) {};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wrench.wrench.rmdirSyncRecursive" id="apidoc.element.wrench.wrench.rmdirSyncRecursive">
+        function <span class="apidocSignatureSpan">wrench.wrench.</span>rmdirSyncRecursive
+        <span class="apidocSignatureSpan">(path, failSilent)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">rmdirSyncRecursive = function (path, failSilent) {
+    var files;
+
+    try {
+        files = fs.readdirSync(path);
+    } catch (err) {
+
+        if(failSilent) return;
+        throw new Error(err.message);
+    }
+
+<span class="apidocCodeCommentSpan">    /*  Loop through and delete everything in the sub-tree after checking it */
+</span>    for(var i = 0; i &#x3c; files.length; i++) {
+        var file = _path.join(path, files[i]);
+        var currFile = fs.lstatSync(file);
+
+        if(currFile.isDirectory())  {
+            // Recursive function back to the beginning
+            exports.rmdirSyncRecursive(file);
+        } else if(currFile.isSymbolicLink()) {
+            // Unlink symlinks
+            if (isWindows) {
+                fs.chmodSync(file, 666) // Windows needs this unless joyent/node#3006 is resolved..
+            }
+
+            fs.unlinkSync(file);
+        } else {
+            // Assume it&#x27;s a file - perhaps a try/catch belongs here?
+            if (isWindows) {
+                fs.chmodSync(file, 666) // Windows needs this unless joyent/node#3006 is resolved..
+            }
+
+            fs.unlinkSync(file);
+        }
+    }
+
+    /*  Now that we know everything in the sub-tree has been deleted, we can delete the main
+     directory. Huzzah for the shopkeep. */
+    return fs.rmdirSync(path);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### Synchronous operations
+``` javascript
+// Recursively create directories, sub-trees and all.
+wrench.mkdirSyncRecursive(dir, 0777);
+
+// Recursively delete the entire sub-tree of a directory, then kill the directory
+wrench.<span class="apidocCodeKeywordSpan">rmdirSyncRecursive</span>(&#x27;my_directory_name&#x27;, failSilently);
+
+// Recursively read directories contents.
+wrench.readdirSyncRecursive(&#x27;my_directory_name&#x27;);
+
+// Recursively chmod the entire sub-tree of a directory
+wrench.chmodSyncRecursive(&#x27;my_directory_name&#x27;, 0755);
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
